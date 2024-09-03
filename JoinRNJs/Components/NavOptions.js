@@ -59,4 +59,4 @@ const NavOptions = () =>{
     );
 }
 
-export default NavOptions;
+export default NavOptions

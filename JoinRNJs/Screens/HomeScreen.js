@@ -2,13 +2,51 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import tw from 'twrnc'
 import NavOptions from '../Components/NavOptions'
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { GOOGLE_MAPS_APIKEY } from "@env";
+import { TextInput } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
+import { setDestination, setOrigin } from '../slices/navSlice';
+
+
 
 const HomeScreen = () => {
+
+    const dispatch = useDispatch();
+
     return (
         <SafeAreaView style={tw`p-4 android:pt-2 bg-white dark:bg-black`}>
             <Text style={[tw`text-2xl text-black p-10`]}>Join Trip</Text>
-            <NavOptions/>
-            </SafeAreaView>
+
+
+            <GooglePlacesAutocomplete
+                placeholder='Where to?'
+                debounce={400}
+                nearbyPlacesAPI="GooglePlacesSearch"
+                styles={{container:{flex: 0}, textInput:{fontSize: 18}}}
+
+
+                 onPress={(data, details = null) => {
+                     // 'details' is provided when fetchDetails = true
+                     console.log(data, details);
+
+                     dispatch(setOrigin({
+                        location: details.geometry.location,
+                        description: data.description
+                     }))
+
+                     dispatch(setDestination(null));
+
+                 }}
+                 fetchDetails={true}
+                 returnKeyType={"search"}
+                query={{
+                    key: GOOGLE_MAPS_APIKEY,
+                    language: 'en',
+                }}
+            />
+            <NavOptions />
+        </SafeAreaView>
     )
 }
 

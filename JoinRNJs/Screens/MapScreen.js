@@ -3,18 +3,25 @@ import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View
 
 import tw from 'twrnc';
 import Map from '../Components/Map';
+import MapView from 'react-native-maps';
 
 const MapScreen=()=>{
 
   return(
     <View>
       <Text>
-        MapScreen
+        MapScreen </Text>
+
         <View style = {tw ` h-1/2`}>
         <Map/>
         </View>
+
+
+        <View style = {tw `h-1/2`}>
+        <Text>Details</Text>
+        </View>
         
-      </Text>
+     
     </View>
   )
 }
