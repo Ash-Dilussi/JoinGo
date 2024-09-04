@@ -20,21 +20,21 @@ const HomeScreen = () => {
 
 
             <GooglePlacesAutocomplete
-                placeholder='Where to?'
+                placeholder='You are at?'
                 debounce={400}
                 nearbyPlacesAPI="GooglePlacesSearch"
-                styles={{container:{flex: 0}, textInput:{fontSize: 18}}}
+                styles={{container:{flex: 0}, textInput:{fontSize: 18, backgroundColor: "#F5F5F5"}}}
 
 
                  onPress={(data, details = null) => {
                      // 'details' is provided when fetchDetails = true
-                     console.log(data, details);
+                     
 
                      dispatch(setOrigin({
                         location: details.geometry.location,
                         description: data.description
                      }))
-
+                     console.log(data.description, details.geometry);
                      dispatch(setDestination(null));
 
                  }}

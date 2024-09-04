@@ -3,31 +3,53 @@ import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View
 
 import tw from 'twrnc';
 import Map from '../Components/Map';
+import MapNavigationCard from '../Components/MapNavigationCard';
 import MapView from 'react-native-maps';
+import SelectOptionCard from '../Components/SelectOptionCard';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const MapScreen=()=>{
 
-  return(
+const MapScreen = () => {
+
+  const Stack= createStackNavigator();
+  return (
     <View>
-      <Text>
-        MapScreen </Text>
-
-        <View style = {tw ` h-1/2`}>
-        <Map/>
-        </View>
 
 
-        <View style = {tw `h-1/2`}>
-        <Text>Details</Text>
-        </View>
-        
-     
+      <View style={tw` h-1/2`}>
+        <Map />
+      </View>
+
+
+      <View style={tw`h-1/2`}>
+
+        <Stack.Navigator>
+          <Stack.Screen
+            name="MapNavigationCard"
+            component={MapNavigationCard}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SelectOptionCard"
+            component={SelectOptionCard}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+        </Stack.Navigator>
+
+      </View>
+
+
     </View>
   )
 }
 
 
-export default MapScreen 
+export default MapScreen
 
 const styles = StyleSheet.create({
 
