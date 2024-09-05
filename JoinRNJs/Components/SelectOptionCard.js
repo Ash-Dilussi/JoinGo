@@ -11,18 +11,22 @@ const SelectOptionCard = () => {
 
     const origin = useSelector(selectOrigin);
     const destination = useSelector(selectDestination);
+
     const getTravelInfo = async () => {
 
         if (origin && destination) {
 
-            fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`)
-            .then(response => {return response.json()})
-                .then(data => {
-                    
-                    console.log(Json.parse(data))
-                })
+            const response = await fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`)
+            const result = await response.json();
+            console.log(result.rows[0].elements)
+            // .then(res=> res.json())
+            //  .then(data => {
+            //         console.log(data)
+            //     })
         }
     }
+
+
     return (
         <View style={tw`m-3`}>
 
